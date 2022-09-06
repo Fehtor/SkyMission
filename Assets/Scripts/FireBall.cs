@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class FireBall : MonoBehaviour
 {
-
+    private int playerLayer;
     Vector3 mousePos;
+    public LayerMask layerMask;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,9 +19,8 @@ public class FireBall : MonoBehaviour
        
         transform.Translate((mousePos - transform.position) * Time.deltaTime * 10);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-
         Destroy(gameObject);
     }
 }
