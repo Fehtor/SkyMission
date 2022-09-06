@@ -586,6 +586,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 3
+  speed: 3
+  health: 100
 --- !u!1 &1904517401
 GameObject:
   m_ObjectHideFlags: 0
