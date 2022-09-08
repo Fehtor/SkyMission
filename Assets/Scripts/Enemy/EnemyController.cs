@@ -8,8 +8,9 @@ public class EnemyController : MonoBehaviour
     private int PlayerLayer;
     public LayerMask layerMask;
     public int radius;
-    public int speed;
+    
     public float health = 100;
+    public static bool playerDetected = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +33,7 @@ public class EnemyController : MonoBehaviour
             if (hit == Player)
             {
 
-                transform.position = Vector2.MoveTowards(transform.position, Player.gameObject.transform.position, speed * Time.deltaTime);
+                playerDetected = true;
             }
             
         }
@@ -44,10 +45,18 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    public void EnemyGiveDamage()
+    public void EnemyGiveDamage(GameObject player)
     {
-
+        PlayerHealrhSystem hs = player.GetComponent<PlayerHealrhSystem>();
+        hs.TakeDamage(10);
     }
 
-  
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == PlayerLayer)
+        {
+            EnemyGiveDamage(collision.gameObject);
+        }
+    }
+
 }
