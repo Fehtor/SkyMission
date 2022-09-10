@@ -21,24 +21,17 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Collider2D gameObj = Physics2D.OverlapCircle(transform.position, radius);
-        
-        if(gameObj.gameObject.layer == PlayerLayer)
+        GameObject gameObj = Physics2D.OverlapCircle(transform.position, radius).gameObject;
+        Debug.Log(gameObj);
+        if(gameObj.layer == PlayerLayer)
         {
-            GameObject Player = gameObj.gameObject;
-            PlayerLayer = LayerMask.NameToLayer("Player");
-
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.position - Player.gameObject.transform.position, radius, PlayerLayer);
-
+            GameObject Player = gameObj;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.position - Player.gameObject.transform.position, radius, ~enemyLayer);
             if (hit == Player)
             {
-
                 playerDetected = true;
             }
-            
         }
-        Debug.Log(gameObj);
-
     }
     public void EnemyRecieveDamage()
     {

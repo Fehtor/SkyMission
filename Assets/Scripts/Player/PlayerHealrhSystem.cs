@@ -12,21 +12,18 @@ public class PlayerHealrhSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TakeDamage(5);
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        health = 100;
-        if(healthBar.fillAmount != tookDamageBar.fillAmount)
+
+        if (tookDamageBar.fillAmount <= healthBar.fillAmount)
         {
-            StartCoroutine(DamageTakedBar());
+            StopCoroutine("DamageTakedBar");
         }
-        else if (tookDamageBar.fillAmount == healthBar.fillAmount)
-        {
-            StopCoroutine(DamageTakedBar());
-        }
+
     }
     public void TakeDamage(float damage)
     {
@@ -34,11 +31,19 @@ public class PlayerHealrhSystem : MonoBehaviour
         Debug.Log(health);
         Debug.Log(health - damage);
         healthBar.fillAmount = (health / 100);
+
+        StartCoroutine("DamageTakedBar");
+        
         
     }
     IEnumerator DamageTakedBar()
     {
         yield return new WaitForSeconds(0.5f);
-        tookDamageBar.fillAmount -= 0.001f;
+        while (true)
+        {
+            yield return new WaitForSeconds(0.003f);
+            tookDamageBar.fillAmount -= 0.001f;
+        }
+        
     }
 }
