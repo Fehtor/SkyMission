@@ -10,6 +10,9 @@ public class Shooting : MonoBehaviour
     private GameObject clone;
     public float fireRate;
     float lastShootTime = 0;
+
+
+    public GameObject ManaController;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +36,7 @@ public class Shooting : MonoBehaviour
    public void Shoot()
     {
         clone = Instantiate(fireBall, fireBallSpawn.position, Quaternion.identity);
-        
+        ManaSystem manaSyst = ManaController.GetComponent<ManaSystem>();
+        manaSyst.ManaSpend(10);
     }
 }

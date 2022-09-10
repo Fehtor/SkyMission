@@ -31,7 +31,9 @@ public class PlayerHealrhSystem : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        healthBar.fillAmount  *= (health / 100);
+        Debug.Log(health);
+        Debug.Log(health - damage);
+        healthBar.fillAmount = (health / 100);
         
     }
     IEnumerator DamageTakedBar()
