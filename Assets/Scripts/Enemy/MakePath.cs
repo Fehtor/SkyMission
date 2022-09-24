@@ -3,9 +3,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
 
 public class MakePath : MonoBehaviour
 {
+    private NavMeshAgent agent;
     EnemyController Controller;
     public Transform PlayerPos;
     public int speed;
@@ -13,6 +16,9 @@ public class MakePath : MonoBehaviour
     void Start()
     {
         Controller = gameObject.GetComponent<EnemyController>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
 
     // Update is called once per frame
@@ -20,7 +26,8 @@ public class MakePath : MonoBehaviour
     {
         if(EnemyController.playerDetected == true)
         {
-            transform.position = Vector2.MoveTowards(transform.position, PlayerPos.position, speed * Time.deltaTime);
+            Debug.Log(3);
+            agent.SetDestination(PlayerPos.position);
         }
     }
 }

@@ -19,7 +19,7 @@ public class FireBall : MonoBehaviour
        
         transform.Translate((mousePos - transform.position) * Time.deltaTime * 10);
     }
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         Destroy(gameObject);
     }

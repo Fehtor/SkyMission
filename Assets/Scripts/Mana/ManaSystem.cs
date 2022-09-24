@@ -9,25 +9,27 @@ public class ManaSystem : MonoBehaviour
     public float mana;
     public float allMana;
     public float manaRecovery;
-    private bool needRecover = true;
+    public static bool mayRecover = false;
+
+    private bool isRecovering = false;
     // Start is called before the first frame update
     void Start()
     {
-        ManaAdd(5);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(mana < allMana && needRecover)
+
+        if (isRecovering && (mana >= allMana || !mayRecover))
         {
-            StartCoroutine("ManaRecover");
-            needRecover = false;
+            isRecovering = false;
+            StopCoroutine("PassiveManaRecover");
         }
-        else
+        if (mayRecover == true && !isRecovering)
         {
-            StopCoroutine("ManaRecover");
-            needRecover = true;
+            StartCoroutine("PassiveManaRecover");
         }
     }
     public void ManaAdd(float manaToAdd)
@@ -40,13 +42,30 @@ public class ManaSystem : MonoBehaviour
     {
         manaBar.fillAmount = (mana - manaToSpend) / 100;
         mana -= manaToSpend;
+        
+       
     }
     
 
-    IEnumerator ManaRecover()
+    IEnumerator PassiveManaRecover()
     {
-        ManaSystem manaSyst = gameObject.GetComponent<ManaSystem>();
-        yield return new WaitForSeconds(manaRecovery);
-        manaSyst.ManaAdd(1);
+        isRecovering = true;
+        yield return new WaitForSeconds(0.7f);
+        while (true)
+        {
+            yield return new WaitForSeconds(manaRecovery);
+            ManaAdd(1);
+        }
+    }
+
+    IEnumerator PotionManaRecover()
+    {
+        int i = 10;
+        while (i > 0)
+        {
+            yield return new WaitForSeconds(0.03f);
+            ManaAdd(1);
+            i--;
+        }
     }
 }

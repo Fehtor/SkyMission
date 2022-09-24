@@ -7,8 +7,12 @@ public class PlayerHealrhSystem : MonoBehaviour
 {
     
     public Image healthBar;
-    float health = 100;
+    public float health = 100;
     public Image tookDamageBar;
+   
+    private int fireBall;
+
+    public int damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +22,17 @@ public class PlayerHealrhSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
 
         if (tookDamageBar.fillAmount <= healthBar.fillAmount)
         {
             StopCoroutine("DamageTakedBar");
         }
+       
+        
 
     }
     public void TakeDamage(float damage)
@@ -36,6 +46,15 @@ public class PlayerHealrhSystem : MonoBehaviour
         
         
     }
+   
+    IEnumerator PotionRegeneration()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.003f);
+            healthBar.fillAmount += 0.01f;
+        }
+    }
     IEnumerator DamageTakedBar()
     {
         yield return new WaitForSeconds(0.5f);
@@ -45,5 +64,15 @@ public class PlayerHealrhSystem : MonoBehaviour
             tookDamageBar.fillAmount -= 0.001f;
         }
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        fireBall = LayerMask.NameToLayer("FireBall");
+        Debug.Log(collision.gameObject);
+        if(collision.gameObject.layer == fireBall)
+        {
+            TakeDamage(damage);
+        }
     }
 }
