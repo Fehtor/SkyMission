@@ -22,7 +22,6 @@ public class SpecSkillUsing : MonoBehaviour
             specSkill.gameObject.SetActive(true);
             StartCoroutine("stopSpecSkill");
         }
-
     }
 
     IEnumerator stopSpecSkill()

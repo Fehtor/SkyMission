@@ -26,7 +26,7 @@ public class MakePath : MonoBehaviour
     {
         if(EnemyController.playerDetected == true)
         {
-            Debug.Log(3);
+            
             agent.SetDestination(PlayerPos.position);
         }
     }

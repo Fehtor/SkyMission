@@ -65,5 +65,6 @@ public class Potions : MonoBehaviour
             playerHS.ChangeHealth(-value / 10);
             yield return new WaitForSeconds(0.1f);
         }
+        
     }
 }

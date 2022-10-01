@@ -6,12 +6,24 @@ public class SpecialSkill : MonoBehaviour
 {
     public float damage;
     PlayerHealrhSystem enemyHealrhSystem;
+    private CircleCollider2D collider;
+    public ContactFilter2D contact;
+    List<RaycastHit2D> hits;
 
-
+    public GameObject baffer;
     // Start is called before the first frame update
     void Start()
     {
+       
+    }
 
+    private void OnEnable()
+    {
+        hits = new List<RaycastHit2D>();
+        collider = GetComponent<CircleCollider2D>();
+        Debug.Log("start");
+        
+        StartCoroutine("EnemyPoisoning");
     }
     private void OnDisable()
     {
@@ -20,26 +32,22 @@ public class SpecialSkill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Physics2D.CircleCast(transform.position, collider.radius, Vector2.zero, contact, hits);
     }
+    
     IEnumerator EnemyPoisoning()
     {
         while (true)
         {
-            enemyHealrhSystem.ChangeHealth(damage);
-            yield return new WaitForSeconds(0.5f);
-        }       
-
-    }
-
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.tag == "Enemy")
-        {
-            enemyHealrhSystem = collision.GetComponent<PlayerHealrhSystem>();
-            StartCoroutine("EnemyPoisoning");
+            foreach (var hit in hits)
+            {
+                BaffSystem baffSystem = hit.collider.gameObject.GetComponent<BaffSystem>();
+                baffSystem.ReceiveObjects(10, BaffType.HealthDebaff);
+            }
+            yield return new WaitForSeconds(0.00000001f);
         }
     }
+
+
    
 }

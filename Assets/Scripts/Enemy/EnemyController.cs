@@ -59,6 +59,8 @@ public class EnemyController : MonoBehaviour
     {
         PlayerHealrhSystem hs = player.GetComponent<PlayerHealrhSystem>();
         hs.ChangeHealth(10);
+        BaffSystem baffSystem = player.GetComponent<BaffSystem>();
+        baffSystem.ReceiveObjects(10, BaffType.Poison);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)

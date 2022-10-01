@@ -8,10 +8,12 @@ public class PlayerMove : MonoBehaviour
     float vertical;
     Rigidbody2D rb;
     public float speed;
+    public float maxSpeed;
     Animator anim;
     // Start is called before the first frame update
     void Start()
     {
+        maxSpeed = speed;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
