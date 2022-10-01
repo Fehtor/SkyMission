@@ -9,10 +9,10 @@ public class PlayerHealrhSystem : MonoBehaviour
     public Image healthBar;
     public float health = 100;
     public Image tookDamageBar;
-   
+    public float allHealth;
     private int fireBall;
 
-    public int damage;
+    public int healthChangeValue;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,31 +30,21 @@ public class PlayerHealrhSystem : MonoBehaviour
         if (tookDamageBar.fillAmount <= healthBar.fillAmount)
         {
             StopCoroutine("DamageTakedBar");
+            tookDamageBar.fillAmount = healthBar.fillAmount;
         }
        
         
 
     }
-    public void TakeDamage(float damage)
+    public void ChangeHealth(float value)
     {
-        health -= damage;
-        Debug.Log(health);
-        Debug.Log(health - damage);
+        health -= value;
         healthBar.fillAmount = (health / 100);
-
         StartCoroutine("DamageTakedBar");
-        
-        
+        if (health > allHealth) health = allHealth;  
     }
    
-    IEnumerator PotionRegeneration()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(0.003f);
-            healthBar.fillAmount += 0.01f;
-        }
-    }
+   
     IEnumerator DamageTakedBar()
     {
         yield return new WaitForSeconds(0.5f);
@@ -72,7 +62,7 @@ public class PlayerHealrhSystem : MonoBehaviour
         Debug.Log(collision.gameObject);
         if(collision.gameObject.layer == fireBall)
         {
-            TakeDamage(damage);
+            ChangeHealth(healthChangeValue);
         }
     }
 }

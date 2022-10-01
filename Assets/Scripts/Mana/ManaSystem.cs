@@ -36,6 +36,7 @@ public class ManaSystem : MonoBehaviour
     {
         manaBar.fillAmount = (mana + manaToAdd) / 100;
         mana += manaToAdd;
+        if (mana > allMana) mana = allMana;
     }
 
     public void ManaSpend(float manaToSpend)
