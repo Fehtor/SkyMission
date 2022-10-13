@@ -1,14 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 enum EnemyState
 {
     patrol,
     attack
 }
+public enum EnemyType
+{
+    Nightmare
+}
+
+
 public class EnemyController : MonoBehaviour
 {
+    public EnemyType enemyType;
+    private float skillCharging = 0;
+    public Image SkillBar;
+
     private Animator anim;
     private EnemyState enemyState;
     private int enemyLayer;
@@ -16,7 +27,7 @@ public class EnemyController : MonoBehaviour
     
     public int radius;
     private GameObject Player;
-    public float health = 100;
+   
     public static bool playerDetected = false;
     // Start is called before the first frame update
     void Start()
@@ -34,7 +45,6 @@ public class EnemyController : MonoBehaviour
     {
         
             RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.position - Player.gameObject.transform.position, radius, ~enemyLayer);
-            Debug.Log(hit.collider);
             if (hit == Player)
             {
                 playerDetected = true;
@@ -60,7 +70,7 @@ public class EnemyController : MonoBehaviour
         PlayerHealrhSystem hs = player.GetComponent<PlayerHealrhSystem>();
         hs.ChangeHealth(10);
         BaffSystem baffSystem = player.GetComponent<BaffSystem>();
-        baffSystem.ReceiveObjects(10, BaffType.Poison);
+        baffSystem.ReceiveObjects(10, BaffType.SpeedBaff);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -71,4 +81,14 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+public void skillBarFil()
+{
+        switch (enemyType)
+        {
+            case EnemyType.Nightmare:
+                skillCharging = 10;
+                SkillBar.fillAmount = SkillBar.fillAmount + (skillCharging / 100);
+                break;
+        }
+    }
 }

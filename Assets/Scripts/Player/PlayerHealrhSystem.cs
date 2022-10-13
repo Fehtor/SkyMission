@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class PlayerHealrhSystem : MonoBehaviour
 {
-    
+   
+
     public Image healthBar;
     public float health = 100;
     public Image tookDamageBar;
@@ -13,6 +15,8 @@ public class PlayerHealrhSystem : MonoBehaviour
     private int fireBall;
 
     public int healthChangeValue;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +28,8 @@ public class PlayerHealrhSystem : MonoBehaviour
     {
         if(health <= 0)
         {
+            EnemyController enemyController = gameObject.GetComponent<EnemyController>();
+            enemyController.skillBarFil();
             Destroy(gameObject);
         }
 
