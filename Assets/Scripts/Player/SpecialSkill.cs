@@ -31,7 +31,8 @@ public class SpecialSkill : MonoBehaviour
     void Update()
     {
         Physics2D.CircleCast(transform.position, collider.radius, Vector2.zero, contact, hits);
-        if(hits[0] != null)
+        Debug.Log(hits);
+        if(hits != null)
         {
             EnemyPoisoning();
         }
@@ -39,23 +40,12 @@ public class SpecialSkill : MonoBehaviour
     
     public void EnemyPoisoning()
     {
-        for (int i = 1; i < hits.Count; i++)
+        Debug.Log(hits.Count);
+        for (int i = 0; i < hits.Count; i++)
         {
-            if(hits[i] != hits[i - 1])
-            {
-                BaffSystem baffSystem = hits[i - 1].collider.gameObject.GetComponent<BaffSystem>();
-                baffSystem.ReceiveObjects(10, BaffType.HealthDebaff);
+                BaffSystem baffSystem = hits[i].collider.gameObject.GetComponent<BaffSystem>();
+                baffSystem.ReceiveObjects(5, BaffType.HealthDebaff);
                 Debug.Log("sjdjdf");
-
-            }
-            else
-            {
-                Debug.Log("sjdjdf");
-                BaffSystem baffSystem = hits[i - 1].collider.gameObject.GetComponent<BaffSystem>();
-                baffSystem.ReceiveObjects(10, BaffType.HealthDebaff);
-                return;
-            }
-           
         }
         
     }

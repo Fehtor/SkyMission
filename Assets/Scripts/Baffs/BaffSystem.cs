@@ -24,21 +24,25 @@ public class BaffSystem : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
         playerMove = Player.GetComponent<PlayerMove>();
 
+        if(gameObject.tag == "Player")
+        {
+            Baff ManaDebaff = new Baff();
+            ManaDebaff.baffType = BaffType.ManaDebaff;
+            baffs.Add(ManaDebaff);
+
+            Baff SpeedBaff = new Baff();
+            SpeedBaff.baffType = BaffType.SpeedBaff;
+            baffs.Add(SpeedBaff);
+        }
+
         Baff healthBaff = new Baff();
         healthBaff.baffType = BaffType.HealthDebaff;
         baffs.Add(healthBaff);
 
-        Baff ManaDebaff = new Baff();
-        ManaDebaff.baffType = BaffType.ManaDebaff;
-        baffs.Add(ManaDebaff);
-
-        Baff SpeedBaff = new Baff();
-        SpeedBaff.baffType = BaffType.SpeedBaff;
-        baffs.Add(SpeedBaff);
-
         Baff Poison = new Baff();
         Poison.baffType = BaffType.Poison;
         baffs.Add(Poison);
+        
         StartCoroutine("Timer");
     }
 
@@ -77,8 +81,8 @@ public class BaffSystem : MonoBehaviour
                     case BaffType.HealthDebaff:
                             PlayerHealrhSystem hs = gameObject.GetComponent<PlayerHealrhSystem>();
                             hs.ChangeHealth(value);
-                        Debug.Log("I'm here");
-                        Debug.Log(baff.baffTimeLeft);
+                             Debug.Log("I'm here");
+                             Debug.Log(baff.baffTimeLeft);
                         break;
                     case BaffType.ManaDebaff:
                             ManaSystem manaSystem = gameObject.GetComponent<ManaSystem>();
@@ -87,7 +91,7 @@ public class BaffSystem : MonoBehaviour
                     case BaffType.SpeedBaff:
                             playerMove = gameObject.GetComponent<PlayerMove>();
                             playerMove.speed = playerMove.maxSpeed + 5;
-                        Debug.Log("Player speed" + playerMove.speed);
+                        Debug.Log(gameObject.name +  " Player speed " +  playerMove.speed);
                         break;
                     default:
                         break;
@@ -101,23 +105,13 @@ public class BaffSystem : MonoBehaviour
 
     public void ReceiveObjects(float baffTimeLeft, BaffType baffTypes)
     {
-        
-        switch (baffTypes)
+        foreach (var baff in baffs)
         {
-            case BaffType.Poison:
-                baffs[3].baffTimeLeft = baffTimeLeft;
+            if(baff.baffType == baffTypes)
+            {
+                baff.baffTimeLeft = baffTimeLeft;
                 break;
-            case BaffType.HealthDebaff:
-                baffs[0].baffTimeLeft = baffTimeLeft;
-                break;
-            case BaffType.ManaDebaff:
-                baffs[1].baffTimeLeft = baffTimeLeft;
-                break;
-            case BaffType.SpeedBaff:
-                baffs[2].baffTimeLeft = baffTimeLeft;
-                break;
-            default:
-                break;
+            }
         }
     }
 }
