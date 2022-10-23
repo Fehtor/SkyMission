@@ -27,8 +27,8 @@ public class HmWrk : MonoBehaviour
         newUser.SetPessword(1234567);
 
 
-        Debug.Log(newUser.GetPassword());
-        Debug.Log(newUser.GetLogin());
+       // Debug.Log(newUser.GetPassword());
+      //  Debug.Log(newUser.GetLogin());
 
     }
 
