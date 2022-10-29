@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1f42779e1d6394047bff907c83bfd091
+guid: 205dbb7563f346443af3937d8f93fe67
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -128,13 +128,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GoldCoin_0
+      name: Stranger_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 4
-        width: 18
-        height: 27
+        x: 0
+        y: 0
+        width: 36
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,8 +142,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eeb47c7625f0eee41b44e9dac658a886
-      internalID: 1672396013
+      spriteID: f714c7056b8dc2e41860f1989adcce14
+      internalID: 1830811945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stranger_1
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 1
+        width: 37
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f305209c9e7c0d48a3c3d79e02e5c9d
+      internalID: 1970275919
       vertices: []
       indices: 
       edges: []
@@ -159,7 +180,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      GoldCoin_0: 1672396013
+      Stranger_0: 1830811945
+      Stranger_1: 1970275919
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 1
