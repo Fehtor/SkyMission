@@ -9,25 +9,16 @@ public class Wallet : MonoBehaviour
 
     public Text moneyText;
     // Start is called before the first frame update
-    void Start()
+    
+    public bool ChangeMoney(int value)
     {
-        
-    }
+        if(moneyCount < value)
+        {
+            return false;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void MoneyAdd(int moneyToAdd)
-    {
-        moneyCount += moneyToAdd; 
-    }
-
-    public void MoneySpend(int moneyToSpend)
-    {
-        moneyCount -= moneyToSpend;
+        moneyCount += value;
+        return true;
     }
 
     public int GetMoney()

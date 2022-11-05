@@ -10,11 +10,11 @@ public class HmWrk : MonoBehaviour
     {
         Good good = new Good();        
         good.name = "Cheese";
-        good.count = 12;
+        
 
         Good good1 = new Good();        
         good1.name = "Bread";
-        good1.count = 10;
+        
         good1.cost = 60;
 
 
@@ -31,7 +31,7 @@ public class HmWrk : MonoBehaviour
         newUser.SetPessword(1234567);
 
         newUser.yourBasket.GetAllGoods();
-        Debug.Log(newUser.yourBasket.summAlCost());
+        Debug.Log(newUser.yourBasket.SummAlCost());
         newUser.yourBasket.RemoveGood(good1);
         newUser.yourBasket.GetAllGoods();
 
@@ -51,7 +51,7 @@ public class Good
 {
     public string name;
     public float cost;
-    public int count;
+  
     private float rating;
     public int ID;
 
@@ -88,14 +88,14 @@ public class Category
 
 public class Basket
 {
-    private List<Good> buyedGoods    = new List<Good>();
+    private List<Good> choosenGoods    = new List<Good>();
     public Dictionary<float, Good> dict = new Dictionary<float, Good>();
+
     private float summedCost;
     public void GoodAdd(Good good)
     {
-        buyedGoods.Add(good);
-        dict[Random.Range(1, 100000000)] = good;
-
+        choosenGoods.Add(good);
+        dict[1] = good;
     }
 
     public void RemoveGood(Good good)
@@ -104,32 +104,41 @@ public class Basket
         {
             if (product.Value == good)
             {
-                buyedGoods.Remove(product.Value);
-                dict.Remove(product.Key);
-                return;
+                if(product.Key == 1)
+                {
+                    choosenGoods.Remove(product.Value);
+                    dict.Remove(product.Key);
+                    return;
+                }
+                else
+                {
+                    dict[product.Key - 1] = good;
+                    dict.Remove(product.Key);
+                }
+               
             }
 
         }
     }
 
-    public float costOfGood(Good good)
+    public float CostOfGood(Good good)
     {
         foreach (var product in dict)
         {
             if(good == product.Value)
             {
-                 return good.cost * good.count;
+                 return good.cost * product.Key;
             }
         }
         return 0;
     }
 
-    public float summAlCost()
+    public float SummAlCost()
     {
         summedCost = 0;
-        foreach (var product in buyedGoods)
+        foreach (var product in dict)
         {
-            summedCost += product.cost * product.count;
+            summedCost += product.Key * product.Value.cost;
         }
         return summedCost;
     }

@@ -5,30 +5,22 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
-    public Dictionary<GoodSCR, Button> dict = new Dictionary<GoodSCR, Button>();
+    
     public List<Button> buttonList = new List<Button>();
     private int i = 0;
+
+    private GameObject InventoryManager;
+    private InventorySystem Inventory;
 
     private GameObject player;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        InventoryManager = GameObject.FindGameObjectWithTag("InventoryManager");
+        Inventory = InventoryManager.GetComponent<InventorySystem>();
 
-        GoodSCR heal = new GoodSCR();
-        heal.name = "HealPotion";
-        heal.changeCost(20);
-        heal.countChange(3);
-        AddButton(heal, buttonList[i]);
-        
-
-        GoodSCR mana = new GoodSCR();
-        mana.name = "ManaPotion";
-        mana.changeCost(20);
-        mana.countChange(3);
-        //   AddButton(heal, buttonList[i]);
-
-        StartCoroutine("RegenGoods");
+        //StartCoroutine("RegenGoods");
     }
 
     // Update is called once per frame
@@ -37,39 +29,33 @@ public class ShopManager : MonoBehaviour
         
     }
 
-   public void AddButton(GoodSCR good, Button button)
+    public void BuyGood(GoodSCR good)
     {
-        dict[good] = button;
-        i++;
-    }
-
-    public void ButtonReceive(GameObject gameObj)
-    {
-        
-        
-        foreach (var item in dict)
+        Wallet wallet = player.GetComponent<Wallet>();
+        if (wallet.ChangeMoney(-good.GetCost()))
         {
-            if (item.Value.gameObject == gameObj)
+            good.countChange(-1);
+            Inventory.ReceiveItem(good);
+            
+
+            switch (good.GetGoodType())
             {
-                BuyGood(item.Key);
-                
+                case GoodType.Heal:
+                    break;
+                case GoodType.Mana:
+                    break;
+                default:
+                    break;
             }
         }
     }
 
-    public void BuyGood(GoodSCR good)
-    {
-        good.countChange(good.GetCount() - 1);
-        Wallet wallet = player.GetComponent<Wallet>();
-        wallet.MoneySpend(good.GetCost());
-    }
-
-    IEnumerator RegenGoods()
+   /* IEnumerator RegenGoods()
     {
         yield return new WaitForSeconds(600);
         foreach (var item in dict)
         {
-            item.Key.countChange(item.Key.GetCount() + 1);
+            item.Key.countChange(1);
         }
-    }
+    }*/
 }
