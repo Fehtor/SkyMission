@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class Wallet : MonoBehaviour
 {
-    private int moneyCount = 100;
+    private float moneyCount = 100;
 
     public Text moneyText;
     // Start is called before the first frame update
     
-    public bool ChangeMoney(int value)
+    public bool ChangeMoney(float value)
     {
         if(moneyCount < value)
         {
@@ -21,7 +21,7 @@ public class Wallet : MonoBehaviour
         return true;
     }
 
-    public int GetMoney()
+    public float GetMoney()
     {
         return moneyCount;
     }

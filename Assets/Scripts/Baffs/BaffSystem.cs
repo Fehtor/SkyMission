@@ -64,7 +64,7 @@ public class BaffSystem : MonoBehaviour
                     {
                         case BaffType.SpeedBaff:
                             playerMove.speed = playerMove.maxSpeed;
-                            Debug.Log("Not here"); // сюда проходят 2 speedBaff, поэтому не робит
+                            
                             break;
                     }       
                  
@@ -81,7 +81,7 @@ public class BaffSystem : MonoBehaviour
                     case BaffType.HealthDebaff:
                             PlayerHealrhSystem hs = gameObject.GetComponent<PlayerHealrhSystem>();
                             hs.ChangeHealth(value);
-                             Debug.Log("I'm here");
+                             
                              Debug.Log(baff.baffTimeLeft);
                         break;
                     case BaffType.ManaDebaff:

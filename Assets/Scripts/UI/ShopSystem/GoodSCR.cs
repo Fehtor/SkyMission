@@ -6,17 +6,32 @@ using UnityEngine.UI;
 public enum GoodType
 {
     Heal,
-    Mana
+    Mana,
+    None
 }
 
 public class GoodSCR : MonoBehaviour
 {
     public string name;
-    [SerializeField]private int cost;
+    [SerializeField]private float cost;
     [SerializeField]private int count;
-    [SerializeField] private GoodType type;
+    [SerializeField] private GoodType goodType;
+
+    public Image myImage;
+
+    public GoodSCR()
+    {
+        count = 0;
+        goodType = GoodType.None; 
+    }
+
+    public GoodSCR(int initialCount, GoodType type)
+    {
+        count = initialCount;
+        goodType = type;
+    }
     
-    public void changeCost(int intToChange)
+    public void changeCost(float intToChange)
     {
         cost = intToChange;
     }
@@ -32,7 +47,7 @@ public class GoodSCR : MonoBehaviour
         return true;
     }
 
-    public int GetCost()
+    public float GetCost()
     {
         return cost;
     }
@@ -44,6 +59,6 @@ public class GoodSCR : MonoBehaviour
 
     public GoodType GetGoodType()
     {
-        return type;
+        return goodType;
     }
 }

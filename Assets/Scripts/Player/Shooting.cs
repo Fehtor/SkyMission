@@ -51,6 +51,6 @@ public class Shooting : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         ManaSystem.mayRecover = true;
-        Debug.Log("StartRecovering");
+       
     }
 }

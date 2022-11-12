@@ -16,19 +16,31 @@ public class CellSCR : MonoBehaviour
        
     }
 
+    public void Start()
+    {
+        
+    }
+
 
     public GoodSCR GetItemInCell()
     {
         return itemInCell;
     }
 
-    public void SetItem(Item newItem)
+    public void SetItem(GoodSCR newItem)
     {
         itemInCell = newItem;
     }
 
     public void SetImage(Image newImage)
     {
-        imageOfItem = newImage;
+        imageOfItem.sprite = newImage.sprite;
+        imageOfItem.color = new Color(255f, 255f, 255f, 255f);
+    }
+
+    public void DeleteImage()
+    {
+        imageOfItem.sprite = null;
+        imageOfItem.color = new Color(255f, 255f, 255f, 0f);
     }
 }

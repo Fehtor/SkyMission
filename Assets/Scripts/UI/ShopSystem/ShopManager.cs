@@ -35,18 +35,7 @@ public class ShopManager : MonoBehaviour
         if (wallet.ChangeMoney(-good.GetCost()))
         {
             good.countChange(-1);
-            Inventory.ReceiveItem(good);
-            
-
-            switch (good.GetGoodType())
-            {
-                case GoodType.Heal:
-                    break;
-                case GoodType.Mana:
-                    break;
-                default:
-                    break;
-            }
+            Inventory.ReceiveItem(good, good.myImage);
         }
     }
 

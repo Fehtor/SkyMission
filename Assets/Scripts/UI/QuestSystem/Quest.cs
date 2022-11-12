@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class Quest : MonoBehaviour
 {
-    public string description;
-    public string questName; //enum; questName == discr
-    public int calculator;
-    [SerializeField]private int reward;
+    [Header("Quest Description")]
+    [TextArea(3, 20)]public string description;
+    public string questName;
+    [SerializeField] private int reward;
+    
+    [Space]
+
+    [Header("Counter")]
+    public int counter;
+    
+    [Space]
+
+    [Header("Settings")]
     [SerializeField]private bool isActive;
     [SerializeField]private bool isDone;
 
 
-    public bool IsActiv()
+    public bool IsActive()
     {
         return isActive;
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScrollAnims : MonoBehaviour
+public class InventoryAnim : MonoBehaviour
 {
 
     private Animator animator;
@@ -20,11 +20,11 @@ public class ScrollAnims : MonoBehaviour
     
     public void DisableAnim()
     {
-        animator.SetInteger("Disabled", 2);
+        animator.SetInteger("AnimChange", 0);
     }
 
     public void EnableAnim()
     {
-        animator.SetInteger("Disabled", 1);
+        animator.SetInteger("AnimChange", 1);
     }
 }
