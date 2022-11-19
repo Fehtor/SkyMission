@@ -36,7 +36,6 @@ public class Chests : MonoBehaviour
         findedGameObj =  Physics2D.OverlapCircle(transform.position, radius);
         if(findedGameObj.gameObject.tag == "Player")
         {
-            Debug.Log("HRHRHRRRRRR");
             pressButton.gameObject.SetActive(true);
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -44,7 +43,7 @@ public class Chests : MonoBehaviour
                 for(int i = 0; i < (int)chestLevel * 2; i++) 
                 {
                     GameObject newCoin = Instantiate(coin, transform.position, Quaternion.identity);
-                    newCoin.transform.position = Vector2.MoveTowards(newCoin.transform.position, Random.insideUnitCircle * 1.3f, 0.01f);
+                   
                     
                 }
               
