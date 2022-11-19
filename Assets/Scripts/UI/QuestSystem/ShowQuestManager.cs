@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class ShowQuestManager : MonoBehaviour
 {
-    [SerializeField] private GameObject questContent;
+    [SerializeField] private GameObject loaytGroup;
+    [SerializeField] private GameObject contentPlane;
     [SerializeField] private GameObject questPanel;
     [SerializeField] private QuestSystem questSystem;
     // Start is called before the first frame update
@@ -26,7 +27,7 @@ public class ShowQuestManager : MonoBehaviour
         List<Quest> activeQuests = questSystem.GetActiveQuests();
         foreach (var activeQuest in activeQuests)
         {
-            GameObject newQuestPanel = Instantiate(questPanel, questContent.transform);
+            GameObject newQuestPanel = Instantiate(questPanel, loaytGroup.transform);
             Text[] texts = newQuestPanel.GetComponentsInChildren<Text>();
             if(texts[0].gameObject.name == "Title")
             {
