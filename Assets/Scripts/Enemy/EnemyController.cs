@@ -16,6 +16,9 @@ public enum EnemyType
 
 public class EnemyController : MonoBehaviour
 {
+    private int nummOfHealCrystals;
+    
+
     public EnemyType enemyType;
     private float skillCharging = 0;
     public Image SkillBar;
@@ -60,17 +63,14 @@ public class EnemyController : MonoBehaviour
                 break;
         }
     }
-    public void EnemyRecieveDamage()
-    {
-
-    }
+   
 
     public void EnemyGiveDamage(GameObject player)
     {
         PlayerHealrhSystem hs = player.GetComponent<PlayerHealrhSystem>();
         hs.ChangeHealth(10);
         BaffSystem baffSystem = player.GetComponent<BaffSystem>();
-        baffSystem.ReceiveObjects(10, BaffType.SpeedBaff);
+        baffSystem.ReceiveObjects(1000, BaffType.SpeedBaff);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -81,13 +81,28 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-public void skillBarFil()
-{
+    public void skillBarFil()
+    {
         switch (enemyType)
         {
             case EnemyType.Nightmare:
                 skillCharging = 10;
                 SkillBar.fillAmount = SkillBar.fillAmount + (skillCharging / 100);
+                break;
+        }
+    }
+
+    public void AfterDeath(GameObject crystall)
+    {
+        switch (enemyType)
+        {
+            case EnemyType.Nightmare:
+                nummOfHealCrystals = Random.Range(0, 1);
+                while(nummOfHealCrystals > 0)
+                {
+                    Instantiate(crystall, transform.position, Quaternion.identity);
+                    nummOfHealCrystals--;
+                }
                 break;
         }
     }

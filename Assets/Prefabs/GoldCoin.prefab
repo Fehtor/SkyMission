@@ -127,5 +127,5 @@ MonoBehaviour:
   minDuration: 1
   maxDuration: 1.5
   step: 0.1
-  minRadius: 0.01
-  maxRadius: 0.1
+  minRadius: 1
+  maxRadius: 5

@@ -5,15 +5,20 @@ using UnityEngine;
 public enum BaffType
 {
     Poison,
-    HealthDebaff, 
+    playerHealthDebaff, 
+    enemyHealthDebaff, 
     ManaDebaff,
-    SpeedBaff
+    SpeedBaff,
+    ManaBaff
 }
 public class BaffSystem : MonoBehaviour
 {
     public List<Baff> baffs;
-    public int value = 7;
+    public float healValue = 7;
+    public float manaValue = 7;
+    public float time;
     PlayerHealrhSystem hs;
+    [SerializeField] ManaSystem ManaSystem;
 
     private GameObject Player;
     PlayerMove playerMove;
@@ -29,15 +34,23 @@ public class BaffSystem : MonoBehaviour
             Baff ManaDebaff = new Baff();
             ManaDebaff.baffType = BaffType.ManaDebaff;
             baffs.Add(ManaDebaff);
+            
+            Baff ManaBaff = new Baff();
+            ManaBaff.baffType = BaffType.ManaBaff;
+            baffs.Add(ManaBaff);
 
             Baff SpeedBaff = new Baff();
             SpeedBaff.baffType = BaffType.SpeedBaff;
             baffs.Add(SpeedBaff);
-        }
 
-        Baff healthBaff = new Baff();
-        healthBaff.baffType = BaffType.HealthDebaff;
-        baffs.Add(healthBaff);
+            Baff playerHealthBaff = new Baff();
+            playerHealthBaff.baffType = BaffType.playerHealthDebaff;
+            baffs.Add(playerHealthBaff);
+        }
+        Baff enemyHealthBaff = new Baff();
+        enemyHealthBaff.baffType = BaffType.enemyHealthDebaff;
+        baffs.Add(enemyHealthBaff);
+
 
         Baff Poison = new Baff();
         Poison.baffType = BaffType.Poison;
@@ -64,6 +77,7 @@ public class BaffSystem : MonoBehaviour
                     {
                         case BaffType.SpeedBaff:
                             playerMove.speed = playerMove.maxSpeed;
+                            Debug.Log(gameObject.name);
                             
                             break;
                     }       
@@ -78,16 +92,22 @@ public class BaffSystem : MonoBehaviour
                     case BaffType.Poison:
                            playerMove.speed = playerMove.maxSpeed / 2;
                         break;
-                    case BaffType.HealthDebaff:
+                    case BaffType.playerHealthDebaff:
                             PlayerHealrhSystem hs = gameObject.GetComponent<PlayerHealrhSystem>();
-                            hs.ChangeHealth(value);
-                             
-                             Debug.Log(baff.baffTimeLeft);
+                            hs.ChangeHealth(-healValue);
+                        break;
+                    case BaffType.enemyHealthDebaff:
+                            EnemyHealthSystem ehs = gameObject.GetComponent<EnemyHealthSystem>();
+                            ehs.ChangeHealth(-healValue);
                         break;
                     case BaffType.ManaDebaff:
-                            ManaSystem manaSystem = gameObject.GetComponent<ManaSystem>();
-                            manaSystem.ManaSpend(value);
+                           ManaSystem.ManaSpend(manaValue);
                         break;
+                    
+                    case BaffType.ManaBaff:
+                           ManaSystem.ManaAdd(manaValue);
+                        break;
+
                     case BaffType.SpeedBaff:
                             playerMove = gameObject.GetComponent<PlayerMove>();
                             playerMove.speed = playerMove.maxSpeed + 5;
@@ -98,7 +118,7 @@ public class BaffSystem : MonoBehaviour
                 }
                 baff.baffTimeLeft--;                
             }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(time);
         }
     }
 

@@ -1,19 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Potion
 {
-    HealthRecover, 
-    ManaRecover
+    HealthPotion,
+    ManaPotion
 }
+
 public class Potions : MonoBehaviour
 {
     public Potion potion;
-    private GameObject player;
-    private ManaSystem manaSystem;
-    private PlayerHealrhSystem playerHS;
-    public float value;
+    [SerializeField] private InventorySystem InventorySystem;
+    [SerializeField] private Image ownIMG;
+    [SerializeField] private GoodSCR goodTypeOfPotion;
+
+    [SerializeField] private Image activeLetter;
+
+    private Collider2D findedGameObj;
+    [SerializeField] private int radius;
+
+    private bool wasAdded;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,47 +31,30 @@ public class Potions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag == "Player")
+        findedGameObj = Physics2D.OverlapCircle(transform.position, radius);
+        if (findedGameObj.gameObject.tag == "Player")
         {
-            manaSystem = collision.gameObject.GetComponentInChildren<ManaSystem>();
-            playerHS = collision.gameObject.GetComponent<PlayerHealrhSystem>();
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            gameObject.GetComponent<Collider2D>().enabled = false;
-            switch (potion)
+            activeLetter.gameObject.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                case Potion.HealthRecover:
-                    StartCoroutine("PotionHealthRecovery");
-                   
-                        break;
-                case Potion.ManaRecover:
-                    StartCoroutine("PotionManaRecovery");
-                    break;
+                AddToInventory();
             }
         }
-    }
-
-    IEnumerator PotionManaRecovery()
-    {
-       
-        for (int i = 0; i < 10; i++)
+        else
         {
-            manaSystem.ManaAdd(value / 10);
-            yield return new WaitForSeconds(0.1f);
+            activeLetter.gameObject.SetActive(false);
         }
     }
 
-   IEnumerator PotionHealthRecovery()
+    
+
+    public void AddToInventory()
     {
-       
-        for (int i = 0; i < 10; i++)
+        if (!wasAdded)
         {
-            playerHS.ChangeHealth(-value / 10);
-            yield return new WaitForSeconds(0.1f);
+            InventorySystem.ReceiveItem(goodTypeOfPotion, ownIMG);
+            Destroy(gameObject);
+            wasAdded = true;
         }
         
     }

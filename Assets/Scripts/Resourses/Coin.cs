@@ -17,12 +17,13 @@ public class Coin : MonoBehaviour
     [SerializeField] float minRadius;
     [SerializeField] float maxRadius;
 
-    private Vector2 destination = new Vector3();
+    private Vector3 destination = new Vector3();
     // Start is called before the first frame update
     void Start()
     {
         duration = Random.Range(minDuration, maxDuration);
         destination = Random.insideUnitCircle * Random.Range(minRadius, maxRadius);
+        destination = transform.position + destination;
         startDistance = Vector3.Distance(transform.position, destination);
 
         StartCoroutine("CoinFly");

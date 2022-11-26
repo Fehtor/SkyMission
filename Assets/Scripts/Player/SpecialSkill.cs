@@ -44,7 +44,7 @@ public class SpecialSkill : MonoBehaviour
         for (int i = 0; i < hits.Count; i++)
         {
                 BaffSystem baffSystem = hits[i].collider.gameObject.GetComponent<BaffSystem>();
-                baffSystem.ReceiveObjects(5, BaffType.HealthDebaff);
+                baffSystem.ReceiveObjects(5, BaffType.enemyHealthDebaff);
                 Debug.Log("sjdjdf");
         }
         
