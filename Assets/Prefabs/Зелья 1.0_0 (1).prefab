@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 370213629}
   - component: {fileID: 370213628}
   - component: {fileID: 370213627}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 842331603414531299}
   - component: {fileID: 842331603414531303}
   - component: {fileID: -3090211281800544624}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "\u0417\u0435\u043B\u044C\u044F 1.0_0 (1)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,11 +204,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   potion: 0
-  InventorySystem: {fileID: 0}
-  ownIMG: {fileID: 5860704787871367984, guid: 72116ccae861ca54a8d1f96e008642f5, type: 3}
+  ownIMG: {fileID: 3904029777641125140, guid: bac84adcc13ed6f499cbb9fbd8318061, type: 3}
   goodTypeOfPotion: {fileID: 842331603414531303}
   activeLetter: {fileID: 370213627}
   radius: 2
+  whatIsGrounded:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &842331603414531303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +227,7 @@ MonoBehaviour:
   cost: 0
   count: 0
   goodType: 0
-  myImage: {fileID: 5860704787871367984, guid: 72116ccae861ca54a8d1f96e008642f5, type: 3}
+  myImage: {fileID: 3904029777641125140, guid: bac84adcc13ed6f499cbb9fbd8318061, type: 3}
 --- !u!61 &-3090211281800544624
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -264,7 +266,7 @@ GameObject:
   - component: {fileID: 7924348428200377825}
   - component: {fileID: 145511361551646638}
   - component: {fileID: 5964006143775816113}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

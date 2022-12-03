@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
+    private GameObject player;
+    private Wallet wallet;
 
     float startDistance;
 
@@ -21,6 +23,9 @@ public class Coin : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        wallet = player.GetComponent<Wallet>();
+
         duration = Random.Range(minDuration, maxDuration);
         destination = Random.insideUnitCircle * Random.Range(minRadius, maxRadius);
         destination = transform.position + destination;
@@ -42,6 +47,15 @@ public class Coin : MonoBehaviour
             Debug.Log(duration * step / startDistance);
             transform.position = Vector2.MoveTowards(transform.position, destination, step);
             yield return new WaitForSeconds(duration * step / startDistance);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            wallet.ChangeMoney(10);
+            Destroy(gameObject);
         }
     }
 }

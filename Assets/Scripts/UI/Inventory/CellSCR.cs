@@ -13,17 +13,7 @@ public class CellSCR : MonoBehaviour
 
     public Text countText;
 
-    public void Update()
-    {
-       
-    }
-
-    public void Start()
-    {
-        
-    }
-
-
+    
     public GoodSCR GetItemInCell()
     {
         return itemInCell;

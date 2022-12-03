@@ -6,10 +6,14 @@ using UnityEngine.UI;
 public class Wallet : MonoBehaviour
 {
     private float moneyCount = 100;
-
-    public Text moneyText;
+    [SerializeField] private Text moneyText;
     // Start is called before the first frame update
-    
+
+    private void Update()
+    {
+        moneyText.text = moneyCount.ToString();
+    }
+
     public bool ChangeMoney(float value)
     {
         if(moneyCount < value)

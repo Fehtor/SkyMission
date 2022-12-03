@@ -77,7 +77,7 @@ public class BaffSystem : MonoBehaviour
                     {
                         case BaffType.SpeedBaff:
                             playerMove.speed = playerMove.maxSpeed;
-                            Debug.Log(gameObject.name);
+                           // Debug.Log(gameObject.name);
                             
                             break;
                     }       

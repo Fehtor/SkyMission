@@ -7,7 +7,10 @@ public class InventorySystem : MonoBehaviour
 {
     private Vector3 playerPos;
     [SerializeField] GameObject Player;
+    [SerializeField] private Shooting shooting;
+
     [SerializeField] BaffSystem baffSystem;
+    [SerializeField] UseManager useManager;
 
     private bool isOpened = false;
     [SerializeField] GameObject InventoryPanel;
@@ -36,6 +39,8 @@ public class InventorySystem : MonoBehaviour
         {
             InventoryAnim.EnableAnim();
             isOpened = true;
+            shooting.enabled = false;
+            
         }
         else if (Input.GetKeyDown(KeyCode.I) && isOpened)
         {
@@ -45,25 +50,12 @@ public class InventorySystem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            UseHeal();
+           useManager.UseHeal(Cells, baffSystem);
         }
         if (Input.GetKeyDown(KeyCode.U))
         {
-            UseMana();
+           useManager.UseMana(Cells, baffSystem);
         }
-
-        /*  if (Input.GetKeyDown(KeyCode.Mouse0))
-          {
-              foreach (var cell in Cells)
-              {
-                   Debug.Log(cell.gameObject.transform.position + "" + "" + Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                  if(cell.gameObject.transform.position == Camera.main.ScreenToWorldPoint(Input.mousePosition))
-                  {
-                      Debug.Log("fhdjgfjgdf");
-
-                  }
-              }
-          }*/
 
         playerPos = Player.transform.position;
     }
@@ -74,7 +66,7 @@ public class InventorySystem : MonoBehaviour
         {
             if(cell.occupied)
             {
-                Debug.Log(cell.GetItemInCell().GetGoodType());
+                
                 if (good.GetGoodType() == cell.GetItemInCell().GetGoodType())
                 {
                     cell.GetItemInCell().countChange(1);
@@ -140,37 +132,37 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    public void UseHeal()
-    {
-        foreach (var cell in Cells)
-        {
-            if (cell.occupied)
-            {
-                Debug.Log(cell.GetItemInCell().GetGoodType());
-                
-                if (cell.GetItemInCell().GetGoodType() == GoodType.Heal)
-                {
-                    baffSystem.ReceiveObjects(550, BaffType.playerHealthDebaff);
-                    DeleteItem(cell);
-                }
-            }
 
+
+    public void addItemInCurrentCell(CellSCR postedCell, CellSCR receiveCell)
+    {
+        CellSCR tempCell = new CellSCR();
+
+        if (!receiveCell.occupied)
+        {
+            receiveCell.SetItem(postedCell.GetItemInCell());
+            receiveCell.SetImage(postedCell.GetImage());
+            receiveCell.occupied = true;
+            receiveCell.countText.text = receiveCell.GetItemInCell().GetCount().ToString();
+
+            postedCell.SetItem(null);
+            postedCell.DeleteImage();
+            postedCell.occupied = false;
+            postedCell.countText.text = 0.ToString();
+        }
+
+        else
+        {
+            Image tempImage = postedCell.GetImage();
+            GoodSCR tempGood = postedCell.GetItemInCell();
+
+            postedCell.SetImage(receiveCell.GetImage());
+            postedCell.SetItem(receiveCell.GetItemInCell());
+
+            receiveCell.SetImage(tempImage);
+            receiveCell.SetItem(tempGood);
+
+            receiveCell.countText.text = receiveCell.GetItemInCell().GetCount().ToString();
         }
     }
-    public void UseMana()
-    {
-        foreach (var cell in Cells)
-        {
-            if (cell.occupied)
-            {
-                if (cell.GetItemInCell().GetGoodType() == GoodType.Mana)
-                {
-                    baffSystem.ReceiveObjects(550, BaffType.ManaBaff);
-                    DeleteItem(cell);
-                }
-            }
-
-        }
-    }
-
 }
