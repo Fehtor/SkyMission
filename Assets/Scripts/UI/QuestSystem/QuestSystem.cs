@@ -35,4 +35,16 @@ public class QuestSystem : MonoBehaviour
 
         return activeQuests;
     }
+
+
+    public void ReceiveKilledEnemy(EnemyType enemyType)
+    {
+        foreach (var quest in GetActiveQuests())
+        {
+            if(quest.typeOfQuest == TypeOfQuest.KillForScore)
+            {
+                quest.CounterMinus(enemyType);
+            }
+        }
+    }
 }

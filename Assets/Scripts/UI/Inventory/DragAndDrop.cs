@@ -59,7 +59,7 @@ public class DragAndDrop : MonoBehaviour
             return;
         }
         draggedItemImage.sprite = defaultSprite;
-        inventorySystem.DeleteItem(cell);
+        inventorySystem.DeleteItem(cell, true);
     }
 
     public GameObject isMouseONCell()

@@ -32,7 +32,7 @@ public class ShopManager : MonoBehaviour
     public void BuyGood(GoodSCR good)
     {
         Wallet wallet = player.GetComponent<Wallet>();
-        if (wallet.ChangeMoney(-good.GetCost()))
+        if (wallet.ChangeMoney(good.GetCost()))
         {
             good.countChange(-1);
             Inventory.ReceiveItem(good, good.myImage);

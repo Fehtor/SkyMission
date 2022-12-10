@@ -44,6 +44,7 @@ public class InventorySystem : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.I) && isOpened)
         {
+            shooting.enabled = true;
             isOpened = false;
             InventoryAnim.DisableAnim();
         }
@@ -110,22 +111,25 @@ public class InventorySystem : MonoBehaviour
                 }
             }
     }
-    public void DeleteItem(CellSCR cell)
+    public void DeleteItem(CellSCR cell, bool needToSpawn)
     {
         if (cell.occupied)
         {
-            if (cell.GetItemInCell().GetCount() == 1)
+            if (needToSpawn)
             {
                 cell.SpawnYourItem(playerPos);
+            }
+
+            if (cell.GetItemInCell().GetCount() == 1)
+            {
                 cell.DeleteImage();
                 cell.SetItem(null);
                 cell.countText.text = 0.ToString();
                 cell.occupied = false;
-
             }
+
             else
             {
-                cell.SpawnYourItem(playerPos);
                 cell.GetItemInCell().countChange(-1);
                 cell.countText.text = cell.GetItemInCell().GetCount().ToString();
             }
@@ -153,8 +157,9 @@ public class InventorySystem : MonoBehaviour
 
         else
         {
-            Image tempImage = postedCell.GetImage();
-            GoodSCR tempGood = postedCell.GetItemInCell();
+            Sprite tempImage = postedCell.GetImage().sprite;
+            GoodSCR tempGood = new GoodSCR(postedCell.GetItemInCell());
+            Debug.Log(tempGood);
 
             postedCell.SetImage(receiveCell.GetImage());
             postedCell.SetItem(receiveCell.GetItemInCell());

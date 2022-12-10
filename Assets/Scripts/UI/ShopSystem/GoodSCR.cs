@@ -30,6 +30,15 @@ public class GoodSCR : MonoBehaviour
         count = initialCount;
         goodType = type;
     }
+
+    public GoodSCR(GoodSCR good)
+    {
+        name = good.name;
+        cost = good.cost;
+        count = good.count;
+        goodType = good.goodType;
+        myImage = good.myImage;
+    }
     
     public void changeCost(float intToChange)
     {

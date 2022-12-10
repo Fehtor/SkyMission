@@ -2,8 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TypeOfQuest{
+    KillForScore
+}
+
 public class Quest : MonoBehaviour
 {
+    public TypeOfQuest typeOfQuest;
+
     [Header("Quest Description")]
     [TextArea(3, 20)]public string description;
     public string questName;
@@ -34,5 +40,22 @@ public class Quest : MonoBehaviour
     public int GetReward()
     {
         return reward;
+    }
+
+    public void CounterMinus(EnemyType enemyType)
+    {
+        switch (enemyType)
+        {
+            case EnemyType.Nightmare:
+                counter--;
+                break;
+            default:
+                break;
+        }
+
+        if(counter == 0)
+        {
+            isDone = true;
+        }
     }
 }

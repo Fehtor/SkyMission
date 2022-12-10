@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class EnemyHealthSystem : MonoBehaviour
 {
+  
+    private QuestSystem questSystem;
+
     public Image healthBar;
     public float health = 100;
     public float allHealth;
@@ -18,7 +21,8 @@ public class EnemyHealthSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        questSystem = GameObject.FindGameObjectWithTag("QuestSystem").GetComponent<QuestSystem>();
+       
     }
 
     // Update is called once per frame
@@ -29,6 +33,7 @@ public class EnemyHealthSystem : MonoBehaviour
             EnemyController enemyController = gameObject.GetComponent<EnemyController>();
             enemyController.skillBarFil();
             enemyController.AfterDeath(Crystalls);
+            questSystem.ReceiveKilledEnemy(enemyController.enemyType);
             Destroy(gameObject);
         }
 

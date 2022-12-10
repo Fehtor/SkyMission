@@ -19,7 +19,7 @@ public class UseManager : MonoBehaviour
                 if (cell.GetItemInCell().GetGoodType() == GoodType.Heal)
                 {
                     baffSystem.ReceiveObjects(550, BaffType.playerHealthDebaff);
-                   InventorySystem.DeleteItem(cell);
+                   InventorySystem.DeleteItem(cell, false);
                 }
             }
 
@@ -34,7 +34,7 @@ public class UseManager : MonoBehaviour
                 if (cell.GetItemInCell().GetGoodType() == GoodType.Mana)
                 {
                     baffSystem.ReceiveObjects(550, BaffType.ManaBaff);
-                    InventorySystem.DeleteItem(cell);
+                    InventorySystem.DeleteItem(cell, false);
                 }
             }
 

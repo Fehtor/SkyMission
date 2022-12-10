@@ -30,6 +30,12 @@ public class CellSCR : MonoBehaviour
         imageOfItem.color = new Color(255f, 255f, 255f, 255f);
     }
 
+    public void SetImage(Sprite sprite)
+    {
+        imageOfItem.sprite = sprite;
+        imageOfItem.color = new Color(255f, 255f, 255f, 255f);
+    }
+
     public Image GetImage()
     {
         return imageOfItem;
