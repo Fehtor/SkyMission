@@ -58,6 +58,7 @@ public class FollowPlayerAndEnemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("I'm here");
         if (collision.gameObject.tag == "Enemy")
         {
             enemyHealthSystem = collision.gameObject.GetComponent<EnemyHealthSystem>();

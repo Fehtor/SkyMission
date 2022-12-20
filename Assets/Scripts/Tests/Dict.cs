@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Dict : MonoBehaviour
-{
-    public Dictionary<string, string> dict = new Dictionary<string, string>();
+{public Dictionary<string, string> dict = new Dictionary<string, string>();
+    
     // Start is called before the first frame update
     void Start()
     {
