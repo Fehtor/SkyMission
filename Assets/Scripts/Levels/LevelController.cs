@@ -6,7 +6,7 @@ public class LevelController : MonoBehaviour
 {
 
      public Dictionary<string, GameObject> dict = new Dictionary<string, GameObject>();
-
+    [SerializeField] private int maxDepth;
 
     [SerializeField] private GameObject verticalWall; 
     [SerializeField] private GameObject horizontalWall; 
@@ -19,12 +19,9 @@ public class LevelController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-
-
         GameObject newFloor =  Instantiate(floor, transform.position, Quaternion.identity);
         Room newRoom = newFloor.AddComponent<Room>();
-        newRoom.SetRoomWalls(new RoomWalls());
+        newRoom.SetRoomWalls(new RoomWalls(false));
     }
 
     public Dictionary<string, GameObject> GetWalls()
@@ -38,7 +35,16 @@ public class LevelController : MonoBehaviour
 
         return dict;
     } 
+
+    public GameObject getFloor()
+    {
+        return floor;
+    }
    
+    public int GetDepth()
+    {
+        return maxDepth;
+    }
 
     // Update is called once per frame
     void Update()

@@ -11,6 +11,7 @@ TagManager:
   - Cell
   - QuestSystem
   - LevelController
+  - floor
   layers:
   - Default
   - TransparentFX

@@ -23,11 +23,32 @@ public class RoomWalls {
         leftWall = RoomWallType.None;
     }
 
+    public RoomWalls (bool isWalls)
+    {
+        if (isWalls)
+        {
+            topWall = RoomWallType.Wall;
+            bottomWall = RoomWallType.Wall;
+            rightWall = RoomWallType.Wall;
+            leftWall = RoomWallType.Wall;
+        }
+        else
+        {
+            topWall = RoomWallType.Door;
+            bottomWall = RoomWallType.Door;
+            rightWall = RoomWallType.Door;
+            leftWall = RoomWallType.Door;
+        }
+    }
+
 }
 
 public class Room : MonoBehaviour
 {
-    
+
+    private int depth;
+    private Collider2D canSpawn;
+
     public RoomWalls roomWalls;
     private LevelController controller;
 
@@ -60,6 +81,11 @@ public class Room : MonoBehaviour
 
         Debug.Log($"{roomWalls.topWall} {roomWalls.rightWall} {roomWalls.bottomWall} {roomWalls.leftWall}");
         SpawnWall();
+        if(controller.GetDepth() > depth)
+        {
+            SpawnNearRooms();
+        }
+       
 }
 
     private RoomWallType GenerateWall()
@@ -83,19 +109,100 @@ public class Room : MonoBehaviour
         Dictionary<string, GameObject> dict = controller.GetWalls();
 
 
-        if(roomWalls.topWall == RoomWallType.Door) { Instantiate(dict["topDoor"], controller.transform.position + verticalUpGap, Quaternion.identity); };
-        if(roomWalls.bottomWall == RoomWallType.Door) { Instantiate(dict["bottomDoor"], controller.transform.position - verticalBottomGap, Quaternion.identity); };
-        if(roomWalls.rightWall == RoomWallType.Door) { Instantiate(dict["rightDoor"], controller.transform.position - horizontalRightGap, Quaternion.identity); };
-        if(roomWalls.leftWall == RoomWallType.Door) { Instantiate(dict["leftDoor"], controller.transform.position + horizontalLeftGap, Quaternion.identity); };
+        if(roomWalls.topWall == RoomWallType.Door) { Instantiate(dict["topDoor"], transform.position + verticalUpGap, Quaternion.identity); };
+        if(roomWalls.bottomWall == RoomWallType.Door) { Instantiate(dict["bottomDoor"], transform.position - verticalBottomGap, Quaternion.identity); };
+        if(roomWalls.rightWall == RoomWallType.Door) { Instantiate(dict["rightDoor"], transform.position - horizontalRightGap, Quaternion.identity); };
+        if(roomWalls.leftWall == RoomWallType.Door) { Instantiate(dict["leftDoor"], transform.position + horizontalLeftGap, Quaternion.identity); };
 
 
-        if (roomWalls.topWall == RoomWallType.Wall) { Instantiate(dict["horizontalWall"], controller.transform.position + verticalUpGap, Quaternion.identity); };
-        if (roomWalls.bottomWall == RoomWallType.Wall) { Instantiate(dict["horizontalWall"], controller.transform.position - verticalBottomGap, Quaternion.identity);  };
-        if (roomWalls.rightWall == RoomWallType.Wall) { Instantiate(dict["verticalWall"], controller.transform.position - horizontalRightWallGap, Quaternion.identity); };
-        if (roomWalls.leftWall == RoomWallType.Wall) { Instantiate(dict["verticalWall"], controller.transform.position + horizontalLeftWallGap, Quaternion.identity); };
-    }
-
+        if (roomWalls.topWall == RoomWallType.Wall) { Instantiate(dict["horizontalWall"], transform.position + verticalUpGap, Quaternion.identity); };
+        if (roomWalls.bottomWall == RoomWallType.Wall) { Instantiate(dict["horizontalWall"], transform.position - verticalBottomGap, Quaternion.identity);  };
+        if (roomWalls.rightWall == RoomWallType.Wall) { Instantiate(dict["verticalWall"], transform.position - horizontalRightWallGap, Quaternion.identity); };
+        if (roomWalls.leftWall == RoomWallType.Wall) { Instantiate(dict["verticalWall"], transform.position + horizontalLeftWallGap, Quaternion.identity); };
+    } 
     
+    
+    public void SpawnNearRooms()
+    {
+        if (roomWalls.topWall == RoomWallType.Door)
+        {
+            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(0, 20, 0), 2);
+            Debug.Log(canSpawn + "It's me mario");
+            if (canSpawn == null)
+            {
+                GameObject newFloor = Instantiate(controller.getFloor(), transform.position + new Vector3(0, 20, 0), Quaternion.identity);
+                Room newRoom = newFloor.AddComponent<Room>();
+
+                RoomWalls walls = new RoomWalls();
+                walls.topWall = RoomWallType.Door;
+                walls.bottomWall = RoomWallType.Door;
+                walls.rightWall = RoomWallType.Wall;
+                walls.leftWall = RoomWallType.Wall;
+
+                newRoom.SetRoomWalls(walls);
+                newRoom.SetDepth(depth + 1);
+            }
+            
+        }
+         if(roomWalls.bottomWall == RoomWallType.Door)
+        {
+            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(0, -20, 0), 2);
+            if (canSpawn == null)
+            {
+                GameObject newFloor = Instantiate(controller.getFloor(), transform.position + new Vector3(0, -20, 0), Quaternion.identity);
+                Room newRoom = newFloor.AddComponent<Room>();
+
+                RoomWalls walls = new RoomWalls();
+                walls.topWall = RoomWallType.Door;
+                walls.bottomWall = RoomWallType.Door;
+                walls.rightWall = RoomWallType.Wall;
+                walls.leftWall = RoomWallType.Wall;
+
+                newRoom.SetRoomWalls(walls);
+                newRoom.SetDepth(depth + 1);
+            }
+            
+        }
+         if(roomWalls.rightWall == RoomWallType.Door)
+        {
+            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(36, 0, 0), 2);
+            if (canSpawn == null)
+            {
+
+                GameObject newFloor = Instantiate(controller.getFloor(), transform.position + new Vector3(36, 0, 0), Quaternion.identity);
+                Room newRoom = newFloor.AddComponent<Room>();
+
+                RoomWalls walls = new RoomWalls();
+                walls.topWall = RoomWallType.Wall;
+                walls.bottomWall = RoomWallType.Wall;
+                walls.rightWall = RoomWallType.Door;
+                walls.leftWall = RoomWallType.Door;
+
+                newRoom.SetRoomWalls(walls);
+                newRoom.SetDepth(depth + 1);
+            }
+
+        }
+         if(roomWalls.leftWall == RoomWallType.Door)
+        {
+            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(-36, 0, 0), 2);
+            if (canSpawn == null)
+            {
+                GameObject newFloor = Instantiate(controller.getFloor(), transform.position + new Vector3(-36, 0, 0), Quaternion.identity);
+                Room newRoom = newFloor.AddComponent<Room>();
+
+                RoomWalls walls = new RoomWalls();
+                walls.topWall = RoomWallType.Wall;
+                walls.bottomWall = RoomWallType.Wall;
+                walls.rightWall = RoomWallType.Door;
+                walls.leftWall = RoomWallType.Door;
+
+                newRoom.SetRoomWalls(walls);
+                newRoom.SetDepth(depth + 1);
+            }
+           
+        }
+    }
 
     public void SetRoomWalls(RoomWalls inp_RoomWalls)
     {
@@ -107,6 +214,7 @@ public class Room : MonoBehaviour
     {
         controller = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
         GenerateWalls();
+
     }
 
     // Update is called once per frame
@@ -114,4 +222,14 @@ public class Room : MonoBehaviour
     {
         
     }
+
+    public void SetDepth(int value)
+    {
+        depth = value;
+    }
+   
 }
+    
+
+   
+
