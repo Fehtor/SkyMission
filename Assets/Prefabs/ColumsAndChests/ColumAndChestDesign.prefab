@@ -104,6 +104,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1478874404075992345}
     m_Modifications:
+    - target: {fileID: 77385488675725024, guid: f558924d3b932484abec022a1cccc625, type: 3}
+      propertyPath: m_Area
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4034361680867534253, guid: f558924d3b932484abec022a1cccc625, type: 3}
       propertyPath: m_Name
       value: Chest_1

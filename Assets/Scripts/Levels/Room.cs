@@ -210,6 +210,8 @@ public class Room : MonoBehaviour
         if (roomWalls.leftWall == RoomWallType.Wall) { Instantiate(dict["verticalWall"], transform.position - horizontalLeftWallGap, Quaternion.identity); };
 
         Instantiate(controller.GetRandomColumn(), transform.position, Quaternion.identity);
+
+        controller.NavMeshUpDate();
     } 
     
     

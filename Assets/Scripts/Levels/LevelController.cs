@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.AI;
+
 public class LevelController : MonoBehaviour
 {
     [SerializeField] private GameObject[] Columns;
@@ -17,6 +19,8 @@ public class LevelController : MonoBehaviour
     [SerializeField] private GameObject bottomDoor;
     [SerializeField] private GameObject floor;
 
+    [SerializeField] private NavMeshSurface Surface2D;
+
     [SerializeField] private LayerMask FloorLayer;
     // Start is called before the first frame update
     void Start()
@@ -24,6 +28,7 @@ public class LevelController : MonoBehaviour
         GameObject newFloor =  Instantiate(floor, transform.position, Quaternion.identity);
         Room newRoom = newFloor.AddComponent<Room>();
         newRoom.SetRoomWalls(new RoomWalls(false));
+        Surface2D.BuildNavMesh();
     }
 
     public Dictionary<string, GameObject> GetWalls()
@@ -56,6 +61,11 @@ public class LevelController : MonoBehaviour
     public LayerMask GetMask()
     {
         return FloorLayer;
+    }
+
+    public void NavMeshUpDate()
+    {
+        Surface2D.UpdateNavMesh(Surface2D.navMeshData);
     }
 
     // Update is called once per frame
