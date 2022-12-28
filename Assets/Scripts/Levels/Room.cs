@@ -111,7 +111,7 @@ public class Room : MonoBehaviour
         
         if(roomWalls.rightWall == RoomWallType.None)
         {
-            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(0, 36, 0), 2, controller.GetMask());
+            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(36, 0, 0), 2, controller.GetMask());
             if (canSpawn)
             {
                 print(canSpawn.gameObject.name + "Hello");
@@ -134,7 +134,7 @@ public class Room : MonoBehaviour
         
         if(roomWalls.leftWall == RoomWallType.None)
         {
-            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(0, -36, 0), 2, controller.GetMask());
+            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(-36, 0, 0), 2, controller.GetMask());
             if (canSpawn)
             {
                 RoomWalls closestRoomWalls = canSpawn.gameObject.GetComponent<Room>().roomWalls;
@@ -189,7 +189,7 @@ public class Room : MonoBehaviour
         Vector3 horizontalRightGap =  new Vector3(14.6f, 0.004f, 0); // правая дверь
         Vector3 horizontalLeftGap =  new Vector3(14.65f, 0.004f, 0); // левая дверь
         Vector3 horizontalRightWallGap =  new Vector3(13.18f, 0.4f, 0); // правая стена
-        Vector3 horizontalLeftWallGap =  new Vector3(13.1f, 0.6f, 0); // левая стена
+        Vector3 horizontalLeftWallGap =  new Vector3(12.66f, 0.6f, 0); // левая стена
         Vector3 verticalBottomGap =  new Vector3(0.05f, 5.51f, 0f); // нижняя дверь
         Vector3 verticalWallBottomGap =  new Vector3(0.05f, 6f, 0f); // нижняя стена
         Vector3 verticalUpGap =  new Vector3(-0.19f, 7.25f, 0f); // верхняя стена и дверь

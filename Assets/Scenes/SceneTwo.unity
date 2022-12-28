@@ -383,7 +383,7 @@ MonoBehaviour:
   - {fileID: 267495555217459992, guid: 7ab32be60c7f7fd4aa681cd7d72eff48, type: 3}
   - {fileID: 5304426832670094253, guid: c149b85f2916533418d449ec29d801db, type: 3}
   - {fileID: 5327568363075166277, guid: d1ad8687ed8387d41962aed1a865cf59, type: 3}
-  maxDepth: 67
+  maxDepth: 12
   verticalWall: {fileID: 1273208443167591000, guid: bad7127989e61ec469933f87aa4b7d41, type: 3}
   horizontalWall: {fileID: 3654740722976974768, guid: 71a4403192d05d347ba295efd83f7e31, type: 3}
   leftDoor: {fileID: 8259216887372824585, guid: 2f0e4d4b8955a4b4e8073d386458eb35, type: 3}
