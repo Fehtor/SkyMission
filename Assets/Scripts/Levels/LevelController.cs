@@ -17,6 +17,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] private GameObject bottomDoor;
     [SerializeField] private GameObject floor;
 
+    [SerializeField] private LayerMask FloorLayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +51,11 @@ public class LevelController : MonoBehaviour
     public int GetDepth()
     {
         return maxDepth;
+    }
+
+    public LayerMask GetMask()
+    {
+        return FloorLayer;
     }
 
     // Update is called once per frame

@@ -45,6 +45,7 @@ public class RoomWalls {
 
 public class Room : MonoBehaviour
 {
+    
 
     private int depth;
     private Collider2D canSpawn;
@@ -66,7 +67,7 @@ public class Room : MonoBehaviour
 
         if (roomWalls.topWall == RoomWallType.None)
         {
-            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(0, 20, 0), 2);
+            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(0, 20, 0), 2, controller.GetMask());
             if (canSpawn)
             {
                 RoomWalls closestRoomWalls = canSpawn.gameObject.GetComponent<Room>().roomWalls;
@@ -88,7 +89,7 @@ public class Room : MonoBehaviour
         
         if(roomWalls.bottomWall == RoomWallType.None)
         {
-            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(0, -20, 0), 2);
+            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(0, -20, 0), 2, controller.GetMask());
             if (canSpawn)
             {
                 RoomWalls closestRoomWalls = canSpawn.gameObject.GetComponent<Room>().roomWalls;
@@ -110,9 +111,10 @@ public class Room : MonoBehaviour
         
         if(roomWalls.rightWall == RoomWallType.None)
         {
-            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(0, 36, 0), 2);
+            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(0, 36, 0), 2, controller.GetMask());
             if (canSpawn)
             {
+                print(canSpawn.gameObject.name + "Hello");
                 RoomWalls closestRoomWalls = canSpawn.gameObject.GetComponent<Room>().roomWalls;
                 if (closestRoomWalls.leftWall == RoomWallType.Door)
                 {
@@ -132,7 +134,7 @@ public class Room : MonoBehaviour
         
         if(roomWalls.leftWall == RoomWallType.None)
         {
-            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(0, -36, 0), 2);
+            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(0, -36, 0), 2, controller.GetMask());
             if (canSpawn)
             {
                 RoomWalls closestRoomWalls = canSpawn.gameObject.GetComponent<Room>().roomWalls;
@@ -188,7 +190,8 @@ public class Room : MonoBehaviour
         Vector3 horizontalLeftGap =  new Vector3(14.65f, 0.004f, 0); // лева€ дверь
         Vector3 horizontalRightWallGap =  new Vector3(13.18f, 0.4f, 0); // права€ стена
         Vector3 horizontalLeftWallGap =  new Vector3(13.1f, 0.6f, 0); // лева€ стена
-        Vector3 verticalBottomGap =  new Vector3(-0.15f, 5.51f, 0f); // нижн€€ стена и дверь
+        Vector3 verticalBottomGap =  new Vector3(0.05f, 5.51f, 0f); // нижн€€ дверь
+        Vector3 verticalWallBottomGap =  new Vector3(0.05f, 6f, 0f); // нижн€€ стена
         Vector3 verticalUpGap =  new Vector3(-0.19f, 7.25f, 0f); // верхн€€ стена и дверь
         
 
@@ -202,7 +205,7 @@ public class Room : MonoBehaviour
 
 
         if (roomWalls.topWall == RoomWallType.Wall) { Instantiate(dict["horizontalWall"], transform.position + verticalUpGap, Quaternion.identity); };
-        if (roomWalls.bottomWall == RoomWallType.Wall) { Instantiate(dict["horizontalWall"], transform.position - verticalBottomGap, Quaternion.identity);  };
+        if (roomWalls.bottomWall == RoomWallType.Wall) { Instantiate(dict["horizontalWall"], transform.position - verticalWallBottomGap, Quaternion.identity);  };
         if (roomWalls.rightWall == RoomWallType.Wall) { Instantiate(dict["verticalWall"], transform.position + horizontalRightWallGap, Quaternion.identity); };
         if (roomWalls.leftWall == RoomWallType.Wall) { Instantiate(dict["verticalWall"], transform.position - horizontalLeftWallGap, Quaternion.identity); };
 
@@ -215,8 +218,8 @@ public class Room : MonoBehaviour
 
         if (roomWalls.topWall == RoomWallType.Door)
         {
-            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(0, 20, 0), 2);
-            Debug.Log(canSpawn + "It's me mario");
+            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(0, 20, 0), 2, controller.GetMask());
+           
             if (canSpawn == null)
             {
                 GameObject newFloor = Instantiate(controller.getFloor(), transform.position + new Vector3(0, 20, 0), Quaternion.identity);
@@ -235,7 +238,7 @@ public class Room : MonoBehaviour
         }
          if(roomWalls.bottomWall == RoomWallType.Door)
         {
-            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(0, -20, 0), 2);
+            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(0, -20, 0), 2, controller.GetMask());
             if (canSpawn == null)
             {
                 GameObject newFloor = Instantiate(controller.getFloor(), transform.position + new Vector3(0, -20, 0), Quaternion.identity);
@@ -251,7 +254,7 @@ public class Room : MonoBehaviour
         }
          if(roomWalls.rightWall == RoomWallType.Door)
         {
-            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(36, 0, 0), 2);
+            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(36, 0, 0), 2, controller.GetMask());
             if (canSpawn == null)
             {
 
@@ -269,7 +272,7 @@ public class Room : MonoBehaviour
         }
          if(roomWalls.leftWall == RoomWallType.Door)
         {
-            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(-36, 0, 0), 2);
+            canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(-36, 0, 0), 2, controller.GetMask());
             if (canSpawn == null)
             {
                 GameObject newFloor = Instantiate(controller.getFloor(), transform.position + new Vector3(-36, 0, 0), Quaternion.identity);
@@ -289,7 +292,7 @@ public class Room : MonoBehaviour
 
     public void SetRoomWalls(RoomWalls inp_RoomWalls)
     {
-        Debug.Log("SetRoomWalsing");
+       
         roomWalls = inp_RoomWalls;
     }
     // Start is called before the first frame update
