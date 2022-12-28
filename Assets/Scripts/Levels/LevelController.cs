@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
+    [SerializeField] private GameObject[] Columns;
 
-     public Dictionary<string, GameObject> dict = new Dictionary<string, GameObject>();
+    public Dictionary<string, GameObject> dict = new Dictionary<string, GameObject>();
     [SerializeField] private int maxDepth;
 
     [SerializeField] private GameObject verticalWall; 
@@ -35,6 +36,11 @@ public class LevelController : MonoBehaviour
 
         return dict;
     } 
+
+    public GameObject GetRandomColumn()
+    {
+        return Columns[Random.Range(0, 6)];
+    }
 
     public GameObject getFloor()
     {
