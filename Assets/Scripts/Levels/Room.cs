@@ -157,12 +157,13 @@ public class Room : MonoBehaviour
 
         Debug.Log($"{roomWalls.topWall} {roomWalls.rightWall} {roomWalls.bottomWall} {roomWalls.leftWall}");
         
-        if(controller.GetDepth() > depth)
+
+        if (controller.GetDepth() > depth)
         {
             SpawnNearRooms();
         }
-        
         SpawnWall();
+
     }
 
     public void SetLastRoomWalls()
