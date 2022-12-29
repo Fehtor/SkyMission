@@ -190,7 +190,7 @@ public class Room : MonoBehaviour
         Vector3 horizontalRightGap =  new Vector3(14.6f, 0.004f, 0); // правая дверь
         Vector3 horizontalLeftGap =  new Vector3(14.65f, 0.004f, 0); // левая дверь
         Vector3 horizontalRightWallGap =  new Vector3(13.18f, 0.4f, 0); // правая стена
-        Vector3 horizontalLeftWallGap =  new Vector3(12.66f, 0.6f, 0); // левая стена
+        Vector3 horizontalLeftWallGap =  new Vector3(12.64f, -0.47f, 0); // левая стена
         Vector3 verticalBottomGap =  new Vector3(0.05f, 5.51f, 0f); // нижняя дверь
         Vector3 verticalWallBottomGap =  new Vector3(0.05f, 6f, 0f); // нижняя стена
         Vector3 verticalUpGap =  new Vector3(-0.19f, 7.25f, 0f); // верхняя стена и дверь
@@ -199,20 +199,25 @@ public class Room : MonoBehaviour
         Dictionary<string, GameObject> dict = controller.GetWalls();
 
 
-        if(roomWalls.topWall == RoomWallType.Door) { Instantiate(dict["topDoor"], transform.position + verticalUpGap, Quaternion.identity); };
-        if(roomWalls.bottomWall == RoomWallType.Door) { Instantiate(dict["bottomDoor"], transform.position - verticalBottomGap, Quaternion.identity); };
-        if(roomWalls.rightWall == RoomWallType.Door) { Instantiate(dict["rightDoor"], transform.position + horizontalRightGap, Quaternion.identity); };
-        if(roomWalls.leftWall == RoomWallType.Door) { Instantiate(dict["leftDoor"], transform.position - horizontalLeftGap, Quaternion.identity); };
+        if(roomWalls.topWall == RoomWallType.Door) { Instantiate(dict["topDoor"], transform.position + verticalUpGap, Quaternion.identity, controller.GetLayout()); }
+        if(roomWalls.bottomWall == RoomWallType.Door) { Instantiate(dict["bottomDoor"], transform.position - verticalBottomGap, Quaternion.identity, controller.GetLayout()); }
+        if(roomWalls.rightWall == RoomWallType.Door) { Instantiate(dict["rightDoor"], transform.position + horizontalRightGap, Quaternion.identity, controller.GetLayout()); }
+        if(roomWalls.leftWall == RoomWallType.Door) { Instantiate(dict["leftDoor"], transform.position - horizontalLeftGap, Quaternion.identity, controller.GetLayout()); }
 
 
-        if (roomWalls.topWall == RoomWallType.Wall) { Instantiate(dict["horizontalWall"], transform.position + verticalUpGap, Quaternion.identity); };
-        if (roomWalls.bottomWall == RoomWallType.Wall) { Instantiate(dict["horizontalWall"], transform.position - verticalWallBottomGap, Quaternion.identity);  };
-        if (roomWalls.rightWall == RoomWallType.Wall) { Instantiate(dict["verticalWall"], transform.position + horizontalRightWallGap, Quaternion.identity); };
-        if (roomWalls.leftWall == RoomWallType.Wall) { Instantiate(dict["verticalWall"], transform.position - horizontalLeftWallGap, Quaternion.identity); };
+        if (roomWalls.topWall == RoomWallType.Wall) { Instantiate(dict["horizontalWall"], transform.position + verticalUpGap, Quaternion.identity, controller.GetLayout()); }
+        if (roomWalls.bottomWall == RoomWallType.Wall) { Instantiate(dict["horizontalWall"], transform.position - verticalWallBottomGap, Quaternion.identity, controller.GetLayout());  }
+        if (roomWalls.rightWall == RoomWallType.Wall) { Instantiate(dict["verticalWall"], transform.position + horizontalRightWallGap, Quaternion.identity, controller.GetLayout()); }
+        if (roomWalls.leftWall == RoomWallType.Wall) { Instantiate(dict["verticalWall"], transform.position - horizontalLeftWallGap, Quaternion.identity, controller.GetLayout()); }
 
-        Instantiate(controller.GetRandomColumn(), transform.position, Quaternion.identity);
+        Instantiate(controller.GetRandomColumn(), transform.position, Quaternion.identity, controller.GetLayout());
 
         controller.NavMeshUpDate();
+
+        for(int i = 0; i < Random.Range(2, 5); i++)
+        {
+            Instantiate(controller.CallEnemySpawn(depth), transform.position + new Vector3(Random.Range(2, 5), Random.Range(2, 5), 0), Quaternion.identity);
+        }
     } 
     
     
@@ -225,7 +230,7 @@ public class Room : MonoBehaviour
            
             if (canSpawn == null)
             {
-                GameObject newFloor = Instantiate(controller.getFloor(), transform.position + new Vector3(0, 20, 0), Quaternion.identity);
+                GameObject newFloor = Instantiate(controller.getFloor(), transform.position + new Vector3(0, 20, 0), Quaternion.identity, controller.GetLayout());
                 Room newRoom = newFloor.AddComponent<Room>();
 
                 RoomWalls walls = new RoomWalls();
@@ -244,7 +249,7 @@ public class Room : MonoBehaviour
             canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(0, -20, 0), 2, controller.GetMask());
             if (canSpawn == null)
             {
-                GameObject newFloor = Instantiate(controller.getFloor(), transform.position + new Vector3(0, -20, 0), Quaternion.identity);
+                GameObject newFloor = Instantiate(controller.getFloor(), transform.position + new Vector3(0, -20, 0), Quaternion.identity, controller.GetLayout());
                 Room newRoom = newFloor.AddComponent<Room>();
 
                 RoomWalls walls = new RoomWalls();
@@ -261,7 +266,7 @@ public class Room : MonoBehaviour
             if (canSpawn == null)
             {
 
-                GameObject newFloor = Instantiate(controller.getFloor(), transform.position + new Vector3(36, 0, 0), Quaternion.identity);
+                GameObject newFloor = Instantiate(controller.getFloor(), transform.position + new Vector3(36, 0, 0), Quaternion.identity, controller.GetLayout());
                 Room newRoom = newFloor.AddComponent<Room>();
 
                 RoomWalls walls = new RoomWalls();
@@ -278,7 +283,7 @@ public class Room : MonoBehaviour
             canSpawn = Physics2D.OverlapCircle(transform.position + new Vector3(-36, 0, 0), 2, controller.GetMask());
             if (canSpawn == null)
             {
-                GameObject newFloor = Instantiate(controller.getFloor(), transform.position + new Vector3(-36, 0, 0), Quaternion.identity);
+                GameObject newFloor = Instantiate(controller.getFloor(), transform.position + new Vector3(-36, 0, 0), Quaternion.identity, controller.GetLayout());
                 Room newRoom = newFloor.AddComponent<Room>();
 
                 RoomWalls walls = new RoomWalls();

@@ -43,6 +43,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1509914538520110833}
     m_Modifications:
+    - target: {fileID: 7932387106462674584, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
+      propertyPath: m_SpriteTilingProperty.drawMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7932387106462674586, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
       propertyPath: m_Name
       value: column (3)
@@ -89,6 +93,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7932387106462674587, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932387106462674590, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
+      propertyPath: m_DrawMode
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -171,6 +179,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1509914538520110833}
     m_Modifications:
+    - target: {fileID: 7932387106462674584, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
+      propertyPath: m_SpriteTilingProperty.drawMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7932387106462674586, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
       propertyPath: m_Name
       value: column (4)
@@ -219,6 +231,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7932387106462674590, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
 --- !u!4 &4357224981104928823 stripped
@@ -233,6 +249,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1509914538520110833}
     m_Modifications:
+    - target: {fileID: 7932387106462674584, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
+      propertyPath: m_SpriteTilingProperty.drawMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7932387106462674586, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
       propertyPath: m_Name
       value: column (3)
@@ -281,6 +301,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7932387106462674590, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
 --- !u!4 &396777540839025174 stripped
@@ -295,6 +319,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1509914538520110833}
     m_Modifications:
+    - target: {fileID: 7932387106462674584, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
+      propertyPath: m_SpriteTilingProperty.drawMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7932387106462674586, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
       propertyPath: m_Name
       value: column (5)
@@ -341,6 +369,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7932387106462674587, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932387106462674590, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
+      propertyPath: m_DrawMode
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

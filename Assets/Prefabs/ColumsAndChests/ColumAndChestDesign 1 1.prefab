@@ -217,6 +217,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2351138306018210165}
     m_Modifications:
+    - target: {fileID: 7932387106462674584, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
+      propertyPath: m_SpriteTilingProperty.drawMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7932387106462674586, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
       propertyPath: m_Name
       value: column (3)
@@ -265,6 +269,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7932387106462674590, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
 --- !u!4 &5088487111676019267 stripped
@@ -279,6 +287,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2351138306018210165}
     m_Modifications:
+    - target: {fileID: 7932387106462674584, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
+      propertyPath: m_SpriteTilingProperty.drawMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7932387106462674586, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
       propertyPath: m_Name
       value: column (3)
@@ -327,6 +339,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7932387106462674590, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
 --- !u!4 &3590780138958568850 stripped
@@ -341,6 +357,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2351138306018210165}
     m_Modifications:
+    - target: {fileID: 7932387106462674584, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
+      propertyPath: m_SpriteTilingProperty.drawMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7932387106462674586, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
       propertyPath: m_Name
       value: column (4)
@@ -387,6 +407,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7932387106462674587, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932387106462674590, guid: e02ff0d51e3b2f54a95d736000b88b48, type: 3}
+      propertyPath: m_DrawMode
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

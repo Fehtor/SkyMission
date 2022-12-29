@@ -6,6 +6,10 @@ using UnityEngine.AI;
 
 public class LevelController : MonoBehaviour
 {
+    
+
+    [SerializeField] private EnemySpawn enemySpawn;
+
     [SerializeField] private GameObject[] Columns;
 
     public Dictionary<string, GameObject> dict = new Dictionary<string, GameObject>();
@@ -19,16 +23,17 @@ public class LevelController : MonoBehaviour
     [SerializeField] private GameObject bottomDoor;
     [SerializeField] private GameObject floor;
 
-    [SerializeField] private NavMeshSurface Surface2D;
+    [SerializeField] private NavMeshSurface surface2D;
+    [SerializeField] private Transform layout;
 
-    [SerializeField] private LayerMask FloorLayer;
+    [SerializeField] private LayerMask floorLayer;
     // Start is called before the first frame update
     void Start()
     {
-        GameObject newFloor =  Instantiate(floor, transform.position, Quaternion.identity);
+        GameObject newFloor =  Instantiate(floor, transform.position, Quaternion.identity, layout);
         Room newRoom = newFloor.AddComponent<Room>();
         newRoom.SetRoomWalls(new RoomWalls(false));
-        Surface2D.BuildNavMesh();
+        surface2D.BuildNavMesh();
     }
 
     public Dictionary<string, GameObject> GetWalls()
@@ -60,17 +65,27 @@ public class LevelController : MonoBehaviour
 
     public LayerMask GetMask()
     {
-        return FloorLayer;
+        return floorLayer;
     }
 
     public void NavMeshUpDate()
     {
-        Surface2D.UpdateNavMesh(Surface2D.navMeshData);
+        surface2D.UpdateNavMesh(surface2D.navMeshData);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+       
+    }
+
+    public GameObject CallEnemySpawn(int depth)
+    {
+        return enemySpawn.GetEnemies(depth);
+    } 
+
+    public Transform GetLayout()
+    {
+        return layout;
     }
 }
